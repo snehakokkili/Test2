@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .con {
+            height: 400px;
+            width: 1500px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #start {
+            margin-left: 350px;
+        }
+
+        #stop {
+            margin-left: 50px;
+        }
+
+        #imgg {
+            height: 150px;
+            margin-top: 150px;
+            position: absolute;
+        }
+        #start{
+            background-color: blue;
+            padding: 10px;
+
+        }
+        #stop{
+            background-color: red;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="con">
+        <img src=".\train.jpeg" id="imgg">
+    </div>
+    <button id="start" onclick="startt()">Start</button>
+    <button id="stop" onclick="stopp()">Stop</button>
+    <script>
+        var train = document.getElementById("imgg");
+        var startbtn = document.getElementById('start');
+        var stopbtn = document.getElementById('stop');
+        let animationId;
+
+        function startt() {
+            let position = 0;
+            const speed = 2;
+
+            function move() {
+                position += speed;
+                train.style.left = position + 'px';
+
+                if (position < 1500 ) {
+                    animationId = requestAnimationFrame(move);
+                }
+            }
+
+            animationId = requestAnimationFrame(move);
+        }
+
+        function stopp() {
+            cancelAnimationFrame(animationId);
+        }
+
+        startbtn.addEventListener('click', startt);
+        stopbtn.addEventListener('click', stopp);
+    </script>
+</body>
+</html>
